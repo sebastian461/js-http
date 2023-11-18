@@ -12,11 +12,20 @@ const fetchQuote = async () => {
  *
  * @param {HTMLDivElement} element
  */
-export const BreakingbadApp = async (element) => {
+export const BreakingbadApp = (element) => {
   console.log("breakingbadApp");
   element.innerHTML = "Loading...";
 
-  const quote = await fetchQuote();
+  const quoteLabel = document.createElement("blockquote");
+  const authorLabel = document.createElement("h3");
+  const nextBtn = document.createElement("button");
+  nextBtn.innerText = "Next quote";
 
-  element.innerHTML = "Data recibida";
+  const renderQuote = ({ quote, author }) => {
+    quoteLabel.innerText = quote;
+    authorLabel.innerText = author;
+    element.replaceChildren(quoteLabel, authorLabel, nextBtn);
+  };
+
+  fetchQuote().then((data) => renderQuote(data));
 };
