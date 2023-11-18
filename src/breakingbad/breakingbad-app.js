@@ -28,4 +28,9 @@ export const BreakingbadApp = (element) => {
   };
 
   fetchQuote().then((data) => renderQuote(data));
+
+  nextBtn.addEventListener("click", () => {
+    element.innerHTML = "Loading...";
+    fetchQuote().then((data) => renderQuote(data));
+  });
 };
